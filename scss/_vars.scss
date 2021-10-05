@@ -1,0 +1,122 @@
+/* =========================================================================================================================== */
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700;300;600;800;400&subset=cyrillic,cyrillic-ext,latin);
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap);
+/*  */
+.container.w-900 {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 0 1rem; 
+}
+$Montserrat: 'Montserrat', sans-serif; 
+$OpenSans: 'Open Sans', sans-serif;
+$Roboto: 'Roboto', sans-serif;
+/*  */
+$base4 : 4px;
+$base6 : 6px;
+$base10 : 10px;
+$base20 : 20px;
+/*  */
+$colors: (
+  dark-theme: rgb(11, 15, 27),
+  sky: rgb(109, 161, 218),
+
+  accept: teal,
+  focus: lime,
+  heart: #FF6767,
+  message: #929292,
+  // 
+  primary: #FFFFFF,
+  aside: #c0c0c0,
+  //
+  primarytextcolor: #333333,
+  secondarytextcolor: #797979,
+  linktext: #6476ba,
+  // 
+  blacked: #000000,
+  light-black: lighten(#000, 30%),
+  // 
+  // whiten-dark5: darken(#fff, 5%),
+);
+/*  */
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+};
+// TODO: to Use in SASS
+// // //
+// selector {
+//   font-family: $Cabin;
+//   background-color: color(message);
+// }
+
+// ************************************************
+// ! ============================================
+$mob-phone: 401px;
+$phone: 601px;
+$mini-tablet: 769px;
+$tablet: 841px;
+$large-tablet: 880px;
+$mini-desktop: 992px;
+@mixin mini-desktop {
+  @media screen and (max-width: #{$mini-desktop}) {
+    @content;
+  }
+};
+@mixin large-tablet {
+  @media screen and (max-width: #{$large-tablet}) {
+    @content;
+  }
+};
+@mixin tablet {
+  @media screen and (max-width: #{$tablet}) {
+    @content;
+  }
+};
+@mixin mini-tablet {
+  @media screen and (max-width: #{$mini-tablet}) {
+    @content;
+  }
+};
+@mixin phone {
+  @media screen and (max-width: #{$phone}) {
+    @content;
+  }
+};
+@mixin mob-phone {
+  @media screen and (max-width: #{$mob-phone}) {
+    @content;
+  }
+};
+// TODO: to Use in SASS
+// 
+// body {
+//   font-size: 2rem;
+//   /*  */
+
+  // @include mini-tablet{
+  //   font-size: 1rem;
+  // }
+// }
+// ************************************************
+// ! 
+// $extra-large-web: 1700px;
+// $large-tablet-bp: 991px;
+// $tablet-bp: 768px;
+// $l-tablet-bp: 769px;
+// $phablet-bp: 576px;
+// $mobile-bp: 430px;
+// /*  */
+// @mixin breackpoint($bp) {
+//   @media screen and (max-width: $bp) {
+//     @content;
+//   }
+// }
+// @mixin breackpoint-min-width($bp) {
+//   @media screen and (min-width: $bp) {
+//     @content;
+//   }
+// }
+// TODO: to Use in SASS
+// @include breackpoint($large-tablet-bp) {
+//   display: none;
+// }

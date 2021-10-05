@@ -1,0 +1,309 @@
+@import "./vars";
+@import "./reset";
+.app-wrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: 99rem;
+  margin: 0 auto;
+  padding: 0 2rem 10rem;
+  @include mini-desktop{
+    flex-direction: column;
+  }
+}
+
+.aside {
+  width: 33.33%;
+  color: color(message);
+  line-height: 1.6;
+  font-size: 1.2rem;
+  @include mini-desktop{
+    width: 100%;
+  }
+  &-header {
+    display: flex;
+    align-items: center;
+    @include mini-desktop{
+      flex-direction: column;
+    }
+  }
+  &__img {
+    display: flex;
+    width: 10rem;
+    height: 10rem;
+  }
+  &__descr {
+    font-size: 1.4rem;
+    margin-left: 2rem;
+    @include mini-desktop{
+      margin-left: 0;
+    }
+
+  }
+  &__city {
+    font-size: 3rem;
+    @include mini-desktop{
+      text-align: center;
+    }
+
+  }
+  &__temp {
+    font-size: 12rem;
+    & ~ * {
+      font-size: 1.4rem;
+      color: color(message);
+      margin-bottom: 2rem;
+    }
+    @include mini-desktop{
+      text-align: center;
+    }
+
+  }
+  &-max-min {
+    display: flex;
+    font-size: 1.8rem;
+    @include mini-desktop{
+      justify-content: center;
+    }
+
+  }
+  &__sunrise-sunset {
+    display: flex;
+    align-items: flex-end;
+    @include mini-desktop{
+      justify-content: center;
+    }
+
+  }
+  &__radius {
+    margin: 0 2rem;
+    position: relative;
+    // 
+    width: 10rem;
+    height: 5rem;  /* высота в два раза меньше ширины, иначе получится полуовал */
+    border: 2px dashed ;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;  /* угол состоит из половины ширины (50% от 10em = 10em : 2 = 5em) и всей высоты (100% от 5em = 5em) */
+    border-bottom: none;
+    &-sun {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      background-color: orange;
+      border-radius: 50%;
+      position: absolute;
+      left: 1rem;
+      top: 6px;
+    }
+  }
+  &__footer {
+    display: flex;
+    align-items: center;
+    
+    & > .fa-map-marker-alt {
+      margin: 0 1rem 0 0;
+      font-size: 2rem;
+    }
+    @include mini-desktop{
+      justify-content: center;
+    }
+
+  }
+  &__location {
+    outline: none;
+    border: 2px solid #00808026;
+    border-radius: $base6;
+    background-color: transparent;
+    padding: .6rem 2rem;
+    color: color(aside);
+    &:focus {
+      border: 2px solid color(accept);
+    }
+  }
+}
+.main {
+  position: relative;
+  flex-grow: 1;
+  max-width: 66%;
+  color: color(message);
+  @include mini-desktop{
+    max-width: 100%;
+  }
+
+  & > h1 {
+    padding: 3rem 0 10rem;
+    @include mini-desktop{
+      text-align: center;
+      padding-bottom: 5rem;
+    }
+
+  }
+  &__clock {
+    font-size: 10rem;
+    color: color(message);
+    min-height: 12rem;
+    @include mini-desktop{
+      font-size: 6rem;
+      text-align: center;
+    }
+  
+  }
+  &__controls {
+    position: relative;
+    margin-top: 2rem;
+  }
+}
+.forcast {
+  position: relative;
+  max-width: 60rem;
+  overflow: hidden;
+  white-space: nowrap;
+  min-height: 26rem;
+  // 
+  @include mini-desktop{
+    margin: 0 auto;
+  }
+
+  &__wrapper {
+    position: relative;
+    display: flex;
+    width: 160rem;
+    transition: 1s;
+
+  }
+  &__item {
+    padding: 1rem;
+    display: inline-block;
+    min-width: 20rem;
+    border: 2px solid #47432d;
+    border-radius: $base6;
+    &-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    &-content {
+      white-space: normal;
+      align-items: center;
+      margin-bottom: 2rem;
+      text-align: center;
+      & > img {
+        margin-bottom: 1rem;
+      }
+      & > p {
+        font-size: 1.4rem;
+        min-height: 3rem;
+        display: flex;
+        justify-content: center;
+      }
+    }
+    &-footer {
+      text-align: center;
+      &-temp {
+        margin-bottom: 2rem;
+        font-size: 5rem;
+        color: color(secondarytextcolor);
+        & > sub {
+          font-size: 1.6rem;
+        }
+      }
+      &-wind {
+        font-size: 1.6rem;
+        & > span {
+          display: inline-block;
+          line-height: .6;
+          font-size: 5rem;
+        }
+      }
+
+    }
+  }
+}
+.next {
+  font-size: 5rem;
+  outline: none;
+  background-color: transparent;
+  color: #474221;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: .8;
+  animation: btn 1s linear infinite alternate;
+  // animation: name duration timing-function delay iteration-count direction fill-mode;
+  @include mini-desktop{
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes btn {
+  0% {
+    opacity: .8;
+    right: 0;
+  }
+  100%{
+    opacity: .2;
+    right: 2rem;
+  }
+}
+.btn {
+  font-size: 5rem;
+  outline: none;
+  background-color: transparent;
+  color: color(accept);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  // 
+  &-wrapper {
+    position: fixed;
+    left: 2rem;
+    top: 2rem;
+    width: 4rem;
+    height: 3rem;
+    text-align: center;
+    background-color: color(primarytextcolor);
+    color: rgb(0, 0, 0);
+    border-radius: $base6;
+    transition: 1s;
+  }
+  &-theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 0;
+    width: 4rem;
+    height: 2rem;
+    border: 2px solid rgb(167, 159, 159);
+    border-radius: $base6;
+    color: aliceblue;
+    transition: 1s;
+    cursor: pointer;
+    &.light-theme {
+      top: 1rem;
+    }
+  }
+}
+
+body {
+  mix-blend-mode: difference;
+  transition: 1s;
+  &.light {
+    background-color: rgb(184, 184, 184);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
