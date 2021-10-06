@@ -13,7 +13,7 @@
 
 .aside {
   width: 33.33%;
-  color: color(message);
+  color: color(secondary);
   line-height: 1.6;
   font-size: 1.2rem;
   @include mini-desktop{
@@ -50,7 +50,7 @@
     font-size: 12rem;
     & ~ * {
       font-size: 1.4rem;
-      color: color(message);
+      // color: color(message);
       margin-bottom: 2rem;
     }
     @include mini-desktop{
@@ -123,7 +123,7 @@
   position: relative;
   flex-grow: 1;
   max-width: 66%;
-  color: color(message);
+  color: color(secondarytextcolor);
   @include mini-desktop{
     max-width: 100%;
   }
@@ -138,7 +138,7 @@
   }
   &__clock {
     font-size: 10rem;
-    color: color(message);
+    // color: color(message);
     min-height: 12rem;
     @include mini-desktop{
       font-size: 6rem;
@@ -249,7 +249,7 @@
   font-size: 5rem;
   outline: none;
   background-color: transparent;
-  color: color(accept);
+  color: #47432d;
   border: none;
   cursor: pointer;
   padding: 0;
@@ -289,7 +289,7 @@ body {
   mix-blend-mode: difference;
   transition: 1s;
   &.light {
-    background-color: rgb(184, 184, 184);
+    background-color: color(secondary);
   }
 }
 

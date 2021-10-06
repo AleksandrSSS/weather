@@ -68,7 +68,7 @@ body {
 
 .aside {
   width: 33.33%;
-  color: #929292;
+  color: #eeeeee;
   line-height: 1.6;
   font-size: 1.2rem;
 }
@@ -132,7 +132,6 @@ body {
 
 .aside__temp ~ * {
   font-size: 1.4rem;
-  color: #929292;
   margin-bottom: 2rem;
 }
 
@@ -238,7 +237,7 @@ body {
       -ms-flex-positive: 1;
           flex-grow: 1;
   max-width: 66%;
-  color: #929292;
+  color: #d5d5d5;
 }
 
 @media screen and (max-width: 992px) {
@@ -260,7 +259,6 @@ body {
 
 .main__clock {
   font-size: 10rem;
-  color: #929292;
   min-height: 12rem;
 }
 
@@ -345,7 +343,7 @@ body {
 .forcast__item-footer-temp {
   margin-bottom: 2rem;
   font-size: 5rem;
-  color: #797979;
+  color: #d5d5d5;
 }
 
 .forcast__item-footer-temp > sub {
@@ -410,7 +408,7 @@ body {
   font-size: 5rem;
   outline: none;
   background-color: transparent;
-  color: teal;
+  color: #47432d;
   border: none;
   cursor: pointer;
   padding: 0;
@@ -463,5 +461,5 @@ body {
 }
 
 body.light {
-  background-color: #b8b8b8;
+  background-color: #eeeeee;
 }
