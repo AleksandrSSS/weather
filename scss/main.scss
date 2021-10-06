@@ -50,7 +50,6 @@
     font-size: 12rem;
     & ~ * {
       font-size: 1.4rem;
-      // color: color(message);
       margin-bottom: 2rem;
     }
     @include mini-desktop{
@@ -138,7 +137,6 @@
   }
   &__clock {
     font-size: 10rem;
-    // color: color(message);
     min-height: 12rem;
     @include mini-desktop{
       font-size: 6rem;
@@ -213,7 +211,6 @@
           font-size: 5rem;
         }
       }
-
     }
   }
 }
