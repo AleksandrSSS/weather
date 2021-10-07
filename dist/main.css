@@ -50,6 +50,7 @@ button {
 }
 
 .app-wrapper {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -378,7 +379,7 @@ button {
 }
 
 .btn-wrapper {
-  position: fixed;
+  position: absolute;
   left: 2rem;
   top: 2rem;
   width: 4rem;

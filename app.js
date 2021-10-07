@@ -54,6 +54,7 @@ const responseWeather = responseLonLatCity().then( data => { // console.log( dat
 /* choose-location */
 const getLocation = document.querySelector('.aside__location')
 getLocation.addEventListener('click', () => {
+  document.querySelector('body').style.overflow = 'hidden'
   // ? get city of Ukraine
   let countries = fetch('https://countriesnow.space/api/v0.1/countries')
   countries
@@ -69,9 +70,9 @@ getLocation.addEventListener('click', () => {
       const form = document.createElement('form')
       form.classList.add('choose-location')
       data.forEach( (e, i) => {
-        let checkRadio = `
+        const locationBTN = `
         <button class="item-location" value="${e}"> ${e} </button>`
-        form.innerHTML += checkRadio
+        form.innerHTML += locationBTN
       })
       document.querySelector('body').insertAdjacentElement('afterbegin', form)
       return form
@@ -95,6 +96,8 @@ getLocation.addEventListener('click', () => {
         weatherForcast.daily.forEach( el => {
           renderForcastWeather( el )
         })
+        // 
+        document.querySelector('body').style = ''
         // 
         console.log(city);
         console.log( result );
@@ -183,7 +186,7 @@ function theme() {
   // 
   const block = document.createElement('div')
   block.classList.add('btn-wrapper')
-  document.querySelector('body').appendChild(block)
+  document.querySelector('.app-wrapper').appendChild(block)
   // 
   const btn = document.createElement('btn')
   btn.classList.add('btn-theme')

@@ -4,6 +4,7 @@ button {
   cursor: pointer;
 }
 .app-wrapper {
+  position: relative;
   display: flex;
   justify-content: space-between;
   max-width: 99rem;
@@ -231,7 +232,7 @@ button {
   padding: 0;
   // 
   &-wrapper {
-    position: fixed;
+    position: absolute;
     left: 2rem;
     top: 2rem;
     width: 4rem;
