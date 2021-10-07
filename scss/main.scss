@@ -13,21 +13,24 @@ button {
     flex-direction: column;
   }
 }
-
 .aside {
-  width: 33.33%;
+  // width: 33.33%;
   color: color(secondary);
   line-height: 1.6;
   font-size: 1.2rem;
   @include mini-desktop{
     width: 100%;
   }
+  &__wrapper {
+    @include mini-desktop{
+      margin-bottom: 5rem;
+    }
+  
+  }
   &-header {
     display: flex;
     align-items: center;
-    @include mini-desktop{
-      flex-direction: column;
-    }
+    flex-direction: column;
   }
   &__img {
     display: flex;
@@ -36,45 +39,21 @@ button {
   }
   &__descr {
     font-size: 1.4rem;
-    margin-left: 2rem;
-    @include mini-desktop{
-      margin-left: 0;
-    }
-
   }
   &__city {
     font-size: 3rem;
-    @include mini-desktop{
-      text-align: center;
-    }
-
+    text-align: center;
   }
   &__temp {
     font-size: 12rem;
-    & ~ * {
-      font-size: 1.4rem;
-      margin-bottom: 2rem;
-    }
     @include mini-desktop{
       text-align: center;
     }
-
-  }
-  &-max-min {
-    display: flex;
-    font-size: 1.8rem;
-    @include mini-desktop{
-      justify-content: center;
-    }
-
   }
   &__sunrise-sunset {
     display: flex;
     align-items: flex-end;
-    @include mini-desktop{
-      justify-content: center;
-    }
-
+    justify-content: center;
   }
   &__radius {
     margin: 0 2rem;
@@ -97,17 +76,10 @@ button {
     }
   }
   &__footer {
+    margin-top: 5rem;
     display: flex;
     align-items: center;
-    
-    & > .fa-map-marker-alt {
-      margin: 0 1rem 0 0;
-      font-size: 2rem;
-    }
-    @include mini-desktop{
-      justify-content: center;
-    }
-
+    justify-content: center;
   }
   &__location {
     outline: none;
@@ -115,9 +87,13 @@ button {
     border-radius: $base6;
     background-color: transparent;
     padding: .6rem 2rem;
-    color: color(aside);
+    font-size: 2rem;
+    color: color(primarytextcolor);
     &:focus {
       border: 2px solid color(accept);
+    }
+    & > .fa-map-marker-alt {
+      margin-right: 1rem;
     }
   }
 }
@@ -284,7 +260,6 @@ button {
     }
   }
 }
-
 body {
   mix-blend-mode: difference;
   transition: 1s;
@@ -292,18 +267,22 @@ body {
     background-color: color(secondary);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.choose-location {
+  color: #fff; 
+  // margin-top: 10rem; 
+  font-size: 1.4rem;
+  position: absolute;
+  width: 100%;
+  max-height: 100vh;
+  background-color: rgb(0, 0, 0);
+  overflow: auto;
+  z-index: 1;
+  & > .item-location {
+    padding: 1rem 0;
+    margin: 0 auto;
+    display: block; 
+    width: 100%;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
