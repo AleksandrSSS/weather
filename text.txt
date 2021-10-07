@@ -1,0 +1,197 @@
+  ! ADD IN <head> this ==>> <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+  ~ using an <i> element to reference the icon 
+  ~ using a <span> element to reference the icon 
+<div>
+  <span class="fas fa-camera"></span> 
+  <i class="fas fa-camera"></i> 
+  <i class="fa fa-spinner fa-spin"></i>
+  <i class="fa fa-o-notch fa-spin"></i>
+  <i class="fa fa-refresh fa-spin"></i>
+  <i class="fa fa-cog fa-spin"></i>
+  <i class="fa fa-spinner fa-pulse"></i>
+</div>
+            
+<div>
+  <span style="font-size: 3em; color: Tomato;">
+    <i class="fas fa-camera"></i>
+  </span>
+  <span style="font-size: 3em; color: Tomato;">
+    <i class="fas fa-camera"></i>
+  </span>
+
+  <span style="font-size: 48px; color: Dodgerblue;">
+    <i class="fas fa-camera"></i>
+  </span>
+
+  <span style="font-size: 3rem;">
+    <span style="color: Mediumslateblue;">
+    <i class="fas fa-camera"></i>
+    </span>
+  </span>
+</div>
+    
+/******  JavaScript ******/
+// .then( data => {
+//   // console.log( "========= получаем город по IP =========" );// console.log(data);    
+//   // let lat = data.geoplugin_latitude // let lon = data.geoplugin_longitude // const requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly&units=metric&lang=ru&appid=${apiKey}`;
+//   // console.log(data.geoplugin_city, '$ 1 = ' + data.geoplugin_currencySymbol, data.geoplugin_currencyConverter.toFixed(2));    
+//   return data
+// })
+
+/*
+  ? get city of Ukraine
+    let countries = fetch('https://countriesnow.space/api/v0.1/countries')
+    countries
+      .then(data => data.json())
+      .then(data => { 
+        let arr = data.filter(e => {
+          return e.country == 'Ukraine'
+        });
+        return arr[0].cities 
+      })
+      .then(data => { 
+        console.log(data); 
+        let select = document.createElement('select')
+        select.classList.add('change-location')
+        select.size = "10"
+
+        data.forEach(e => {
+          let option = document.createElement('option')
+          option.innerText = e
+          select.appendChild(option)
+        })
+        console.log(select);
+        document.querySelector('.aside__footer').insertAdjacentElement('beforeend', select)
+        return data 
+      })
+
+ 
+  ? forcast 8 day's
+    const requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=50.5434&lon=30.212&exclude=current,minutely,hourly&units=metric&lang=ru&appid=ac4d8af28a8c864ae7422cba18ba1e76`;
+
+  ? имитация события
+    document.querySelector('#city').dispatchEvent(new Event('change'));
+*/
+/* 
+  let options = new Date().toLocaleDateString("ru-RU", {
+    weekday:"narrow",// "short" и "long".
+    era:"narrow",// "short" и "long".
+    year:"numeric",// и "2-digit".
+    month:"numeric",// "2-digit", "narrow", "short" и "long".
+    day:"numeric",// и "2-digit".
+    hour:"numeric",// и "2-digit".
+    minute:"numeric",// и "2-digit".
+    second:"numeric",// и "2-digit".
+    timeZoneName:"short"// и "long".
+  })
+*/
+
+/*
+const requestIP = fetch(URL[0], requestOptions)// "//www.geoplugin.net/json.gp",
+requestIP
+  .then( data => {
+    return data.json()
+  })
+  .then (data => {
+    // console.log( "========= погода =========" );
+    const lat = data.geoplugin_latitude 
+    const lon = data.geoplugin_longitude 
+    const forc8ReqtUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly&units=metric&lang=ru&appid=${apiKey1}`;
+    //
+    const selectedCity = data.geoplugin_city
+    const weatherReqtUrl = `https://api.openweathermap.org/data/2.5/weather?q=${selectedCity}&units=metric&lang=ru&appid=${apiKey1}`
+    const requestWeather = fetch(weatherReqtUrl)
+    requestWeather
+      .then(data2 => {
+        return data2.json()
+      })
+      .then(data2 => {
+        const curTime = new Date(data2.dt * 1000).toLocaleString()
+        // 
+        const hRise = new Date(data2.sys.sunrise * 1000).getHours()
+        const mRise = (new Date(data2.sys.sunrise * 1000).getMinutes() < 10) ? `0${new Date(data2.sys.sunrise * 1000).getMinutes()}` : new Date(data2.sys.sunrise * 1000).getMinutes()
+        // 
+        const hSet = new Date(data2.sys.sunset * 1000).getHours()
+        const mSet = (new Date(data2.sys.sunset * 1000).getMinutes() < 10) ? `0${new Date(data2.sys.sunset * 1000).getMinutes()}` : new Date(data2.sys.sunset * 1000).getMinutes()
+        // 
+        const sunrise = hRise + " : " + mRise
+        const sunset = hSet + " : " + mSet
+        // 
+        const asideBlock = `
+          <div class="aside-header">
+            <img class="aside__img" src="http://openweathermap.org/img/w/${data2.weather[0].icon}.png" alt="">
+            <div class="aside__descr">${data2.weather[0].description}</div>
+          </div>
+          <div class="aside__city">${data2.name}</div>
+          <div class="aside__temp">${data2.main.temp.toFixed(0)} <small>&#8451;</small></div>
+          <div class="aside-max-min">
+            <div class="aside__temp-max"> <sub>max</sub>  ${data2.main.temp_max.toFixed(0)} &#8451;&nbsp;/&nbsp;</div>
+            <div class="aside__temp-min">	&#32; ${data2.main.temp_min.toFixed(0)} &#8451;<sub> min</sub></div>
+          </div>
+          <div class="aside__sunrise-sunset">
+            <div class="aside__sunrise">${sunrise}</div>
+            <div class="aside__radius"> <span class="aside__radius-sun"></span> </div>
+            <div class="aside__sunset">${sunset}</div> 
+          </div> `
+        // document.querySelector('.aside').insertAdjacentHTML("afterbegin", asideBlock)
+        return data2
+      })
+      const requestForcastWeather = fetch(forc8ReqtUrl)
+      requestForcastWeather
+        .then( dataForc => dataForc.json() )
+        .then( dataForc => {
+          // console.log( "===== прогноз на 8 дней =====" )
+          dataForc.daily.forEach(el => {
+            const optionsDay = {
+              weekday:"short",//  и ."narrow" "short" "long"
+            }
+            const optionsDate = {
+              day:"numeric",// и "2-digit".
+              month:"numeric",// "2-digit", "narrow", "short" и "long".
+            }
+            const day = new Date(el.dt * 1000).toLocaleDateString("ru-RU", optionsDay)
+            const date = new Date(el.dt * 1000).toLocaleDateString("ru-RU", optionsDate)
+
+            const forcastItem = `
+              <div class="forcast__item">
+                <div class="forcast__item-title">
+                  <span>${day.toUpperCase()}</span> <span>${date}</span>
+                </div>
+                <div class="forcast__item-content">
+                <img src="http://openweathermap.org/img/w/${el.weather[0].icon}.png" alt="">
+                  <p>${el.weather[0].description}</p>
+                </div>
+                <div class="forcast__item-footer">
+                  <p class="forcast__item-footer-temp js-temp-day">${el.temp.day.toFixed(0)} &#8451; <sub class="js-temp-night">${el.temp.night.toFixed(0)} &#8451;</sub> </p>
+                  <p class="forcast__item-footer-wind"> ветер ${el.wind_speed.toFixed(0)} м/с <span style="transform: rotateZ(${el.wind_deg}deg);">&#8593;</span></p>
+                </div>
+              </div>`
+            // document.querySelector('.forcast__wrapper').insertAdjacentHTML('beforeend', forcastItem)
+          })
+        })
+  })
+
+*/
+
+
+/******  SCSS ******/
+/* //? createElement('select');classList.add('change-location')
+.change-location {
+  position: absolute;
+  z-index: 1;
+  // left: 0;
+  // top: 0;
+  // padding: .4rem 1.4rem;
+  color: aliceblue;
+  background-color: transparent;
+  max-height: 100%;
+  & > option {
+    padding: 1rem 4rem;
+
+    color: rgb(196, 196, 196);
+    background-color: rgb(0, 0, 0);
+    font-size: 1.4rem;
+  }
+}
+
+ */

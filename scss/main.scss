@@ -1,5 +1,8 @@
 @import "./vars";
 @import "./reset";
+button {
+  cursor: pointer;
+}
 .app-wrapper {
   display: flex;
   justify-content: space-between;

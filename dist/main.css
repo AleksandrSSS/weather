@@ -45,6 +45,10 @@ body {
   background-color: #0b0f1b;
 }
 
+button {
+  cursor: pointer;
+}
+
 .app-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
