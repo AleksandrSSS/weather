@@ -1,6 +1,4 @@
 const apiKey1 = "ac4d8af28a8c864ae7422cba18ba1e76"; //~  мой ключ 
-// const forcast8DaysUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly&units=metric&lang=ru&appid=${apiKey1}`;
-// const weatherReqtUrl = `https://api.openweathermap.org/data/2.5/weather?q=${selectedCity}&units=metric&lang=ru&appid=${apiKey1}`
 // 
 const URL = [
   "//www.geoplugin.net/json.gp",
@@ -11,46 +9,50 @@ const requestOptions = {
   method: 'GET',
   redirect: 'follow'
 }
+// 
+allRequests()
+// 
+function allRequests() {
 
-/* GET city, latitude, longitude from IP */
-const responseLonLatCity = async () => {
-  const requestIpTest = await fetch(URL[0], requestOptions)// "//www.geoplugin.net/json.gp",
-  const response = await requestIpTest.json()
-  const valObj = {
-    city: response.geoplugin_city,
-    lat: response.geoplugin_latitude,
-    lon: response.geoplugin_longitude
-  }
-  return valObj
-}
-/* WEATHER */
-const responseWeather = responseLonLatCity().then( data => { // console.log( data );//{city: 'Kyiv', lat: '50.4333', lon: '30.5167'}
-  
-  weatherResponse(data)
-  weatherForcastResponse(data)
-  slider() 
-  theme()
-
-  async function weatherResponse(data) {
-    const weatherReqtUrl = `https://api.openweathermap.org/data/2.5/weather?q=${data.city}&units=metric&lang=ru&appid=${apiKey1}`
-    const getWeatherObj = await fetch(weatherReqtUrl) /* .then(data => {console.log(data)}) */
-    const weather = await getWeatherObj.json() /* .then(data => {console.log(data)}) */
-    // console.log(weather);
-    renderWeather( weather )    
-    return weather
-  }
-  // 
-  async function weatherForcastResponse(data) {
-    const forc8ReqtUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.lat}&lon=${data.lon}&exclude=current,minutely,hourly&units=metric&lang=ru&appid=${apiKey1}`;
-    const getWeatherObj = await fetch(forc8ReqtUrl) /* .then(data => {console.log(data)}) */
-    const weatherForcast = await getWeatherObj.json() /* .then(data => {console.log(data)}) */
-    // console.log(weatherForcast);
-    weatherForcast.daily.forEach(async el => {
-      renderForcastWeather( el )
+  const getIP = "//www.geoplugin.net/json.gp"
+  const requestIp = fetch(getIP, requestOptions)// "//www.geoplugin.net/json.gp",
+  requestIp
+  .then(data => data)
+  .then(data => data.json())
+  .then(data => {
+    const valObj = { city: data.geoplugin_city, lat: data.geoplugin_latitude, lon: data.geoplugin_longitude }
+    return valObj
+  })
+  .then(data => {// console.log(data)//{city: 'Kyiv', lat: '50.4333', lon: '30.5167'}
+    const URLs = {
+      curreWeather: fetch(`https://api.openweathermap.org/data/2.5/weather?q=${data.city}&units=metric&lang=ru&appid=${apiKey1}`),
+      forcast8Days: fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.lat}&lon=${data.lon}&exclude=current,minutely,hourly&units=metric&lang=ru&appid=${apiKey1}`)
+    }
+    return Promise.allSettled([URLs.curreWeather, URLs.forcast8Days])
+  })
+  .then(data => {
+    let arr = data.map( e => e.value.json() )
+    return arr
+  })
+  .then(data => {
+    data.map( e => {
+      e.then(data => {
+        if (data.daily) {
+          data.daily.forEach( item => {
+            renderForcastWeather( item ) 
+          })
+        }
+        else {
+          renderWeather( data ) 
+        }
+      })
     })
-    return weatherForcast
-  }
-})
+    slider()
+    theme()
+    return data
+  })
+  .catch(err => console.log(err))
+}
 /* choose-location */
 const getLocation = document.querySelector('.aside__location')
 getLocation.addEventListener('click', () => {
@@ -99,9 +101,9 @@ getLocation.addEventListener('click', () => {
         // 
         document.querySelector('body').style = ''
         // 
-        console.log(city);
-        console.log( result );
-        console.log( weatherForcast.daily );
+        // console.log(city);
+        // console.log( result );
+        // console.log( weatherForcast.daily );
         // 
         return result
       })
@@ -225,7 +227,8 @@ setInterval(() => {
   let s = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds()
   blockClock.innerHTML = `${h}: ${m}: ${s}`
 }, 1000);
-
+/*  */
+// Promise.allSettled
 
 
 
