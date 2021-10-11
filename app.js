@@ -72,15 +72,14 @@ getLocation.addEventListener('click', () => {
       const form = document.createElement('form')
       form.classList.add('choose-location')
       data.forEach( (e, i) => {
-        const locationBTN = `
-        <button class="item-location" value="${e}"> ${e} </button>`
+        const locationBTN = `<button class="item-location" value="${e}"> ${e} </button>`
         form.innerHTML += locationBTN
       })
       document.querySelector('body').insertAdjacentElement('afterbegin', form)
       return form
     })
     .then(form => { // change location & render new dataValue
-      let val = form.addEventListener('submit', async (event) => {
+      form.addEventListener('submit', async (event) => {
         event.preventDefault(); event.stopPropagation();
         // 
         form.remove()
@@ -100,11 +99,7 @@ getLocation.addEventListener('click', () => {
         })
         // 
         document.querySelector('body').style = ''
-        // 
-        // console.log(city);
-        // console.log( result );
-        // console.log( weatherForcast.daily );
-        // 
+        // console.log(city);// console.log( result );// console.log( weatherForcast.daily );
         return result
       })
     })
