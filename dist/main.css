@@ -431,7 +431,9 @@ body.light {
 .choose-location {
   color: #fff;
   font-size: 1.4rem;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   max-height: 100vh;
   background-color: black;

@@ -2,8 +2,7 @@ const apiKey1 = "ac4d8af28a8c864ae7422cba18ba1e76"; //~  мой ключ
 // 
 const URL = [
   "//www.geoplugin.net/json.gp",
-  "www.ip-api.com/json",
-  "www.api.ipify.org?format=json",
+  "//www.ip-api.com/json",
 ]
 const requestOptions = {
   method: 'GET',
@@ -14,28 +13,21 @@ allRequests()
 // 
 
 function allRequests() {
-  // console.log(URL[0],URL[1],URL[2])
-  const getIP = "//www.geoplugin.net/json.gp"
-  const requestIp = fetch(getIP, requestOptions)// "//www.ip-api.com/json",
-  requestIp
-  .then(data => data)
-  .then(data => data.json())
-  .then(data => {
+  const data = { 
+    city: "Kyiv", 
+    lat: 50.458, 
+    lon: 30.5303 
+  }
+  const URLs = {
+    curreWeather: fetch(`https://api.openweathermap.org/data/2.5/weather?q=${data.city}&units=metric&lang=ru&appid=${apiKey1}`),
+    forcast8Days: fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.lat}&lon=${data.lon}&exclude=current,minutely,hourly&units=metric&lang=ru&appid=${apiKey1}`)
+  }
 
-    const valObj = { 
-      city: data.geoplugin_city, 
-      lat: data.geoplugin_latitude, 
-      lon: data.geoplugin_longitude 
-    }
-    return valObj
-  })
-  .then(data => {// console.log(data)//{city: 'Kyiv', lat: '50.4333', lon: '30.5167'}
-    
-    const URLs = {
-      curreWeather: fetch(`https://api.openweathermap.org/data/2.5/weather?q=${data.city}&units=metric&lang=ru&appid=${apiKey1}`),
-      forcast8Days: fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.lat}&lon=${data.lon}&exclude=current,minutely,hourly&units=metric&lang=ru&appid=${apiKey1}`)
-    }
-    return Promise.allSettled([URLs.curreWeather, URLs.forcast8Days])
+  const requestWeatherAndForcast = Promise.allSettled([URLs.curreWeather, URLs.forcast8Days])
+  requestWeatherAndForcast
+  .then(data => {
+    return data
+    // return Promise.allSettled([URLs.curreWeather, URLs.forcast8Days])
   })
   .then(data => {
     let arr = data.map( e => e.value.json() )
